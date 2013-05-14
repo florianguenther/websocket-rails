@@ -56,8 +56,9 @@ module WebsocketRails
       if WebsocketRails.synchronize? && event.server_token.nil?
         Synchronization.publish event
       end
-
-      subscribers.each do |subscriber|
+      
+      receiver = WebsocketRails.config.exclude_sender_from_broadcast ? subscribers.reject {|subscriber| subscriber == event.connection} : subscribers 
+      receiver.each do |subscriber|
         subscriber.trigger event
       end
     end

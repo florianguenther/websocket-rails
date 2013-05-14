@@ -115,6 +115,14 @@ module WebsocketRails
         :max_conns => 1024
       }
     end
+    
+    def exclude_sender_from_broadcast
+      @exclude_sender_from_broadcast ||= false
+    end
+    
+    def exclude_sender_from_broadcast=(value)
+      @exclude_sender_from_broadcast = value
+    end
 
   end
 end
